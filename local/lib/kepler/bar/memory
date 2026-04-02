@@ -1,0 +1,16 @@
+#!/bin/bash
+
+print() {
+	printf '%s\n' "$1"
+	exit 0
+}
+
+icon="󰍛"
+stdout="$(free --mega -t)"
+physical="$(echo "$stdout" | grep Mem | awk '{print $2}')"
+virtual="$(echo "$stdout" | grep Swap | awk '{print $2}')"
+total="$(echo "$stdout" | grep Total | awk '{print $2}')"
+used="$(echo "$stdout" | grep Total | awk '{print $3}')"
+free="$(echo "$stdout" | grep Total | awk '{print $4}')"
+
+print "$icon ${physical}M+${virtual}M=${total}M,${used}M,${free}M"

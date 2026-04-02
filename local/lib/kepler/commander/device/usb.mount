@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $ROFI_RETV in
+	0)
+		list=$(lsblk -nr --output='NAME,SIZE,FSTYPE,TYPE' | grep -v mmc | grep part | awk '{ print "󱊞 " $1 " " $2 }')
+		echo -en "󰌍 Go Back...\n"
+		echo -en "${list}\n"
+		;;
+	1)
+		selection="$(awk '{ print tolower($2) }' <<< "$@")"
+		if [ "$selection" = "go" ]; then
+			coproc ( rofi -show device.usb -modes "device.usb:~/.local/lib/kepler/commander/device/usb" )
+		else
+			coproc ( udisksctl mount --no-user-interaction -b /dev/$selection && notify-send "Mounted" "$selection" )
+		fi
+		;;
+esac

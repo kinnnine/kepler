@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ x"$@" = x"󰌍 Go Back..." ]; then
+	coproc ( rofi -show device -modes "device:~/.local/lib/kepler/commander/device/main" )
+	exit 0
+elif [ x"$@" = x"󱊞 Mount" ]; then
+	coproc ( rofi -show device.usb.mount -modes "device.usb.mount:~/.local/lib/kepler/commander/device/usb.mount" )
+	exit 0
+elif [ x"$@" = x"󱊞 Unmount" ]; then
+	coproc ( rofi -show device.usb.unmount -modes "device.usb.unmount:~/.local/lib/kepler/commander/device/usb.unmount" )
+	exit 0
+elif [ x"$@" = x"󱊞 Unmount All" ]; then
+	coproc ( rofi -show device.usb.unmountall -modes "device.usb.unmountall:~/.local/lib/kepler/commander/device/usb.unmountall" )
+	exit 0
+fi
+
+echo "󰌍 Go Back..."
+echo "󱊞 Mount"
+echo "󱊞 Unmount"
+echo "󱊞 Unmount All"

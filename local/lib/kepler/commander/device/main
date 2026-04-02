@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ x"$@" = x"󰌍 Go Back..." ]; then
+	coproc ( rofi -show commander -modes "commander:~/.local/lib/kepler/commander/main" )
+	exit 0
+elif [ x"$@" = x"󱊞 USB Storage" ]; then
+	coproc ( rofi -show device.usb -modes "device.usb:~/.local/lib/kepler/commander/device/usb" )
+	exit 0
+elif [ x"$@" = x"󰟜 SDCard Storage" ]; then
+	coproc ( rofi -show device.sdcard -modes "device.sdcard:~/.local/lib/kepler/commander/device/sdcard" )
+	exit 0
+fi
+
+echo "󰌍 Go Back..."
+echo "󱊞 USB Storage"
+echo "󰟜 SDCard Storage"

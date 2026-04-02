@@ -1,0 +1,25 @@
+#!/bin/bash
+
+declare -a entries=(
+	"󰌍 Go Back..."
+	" Rescan"
+)
+
+case $ROFI_RETV in
+	0)
+		list=$(nmcli -f BSSID,SSID,CHAN,RATE,SIGNAL,BARS,SECURITY device wifi | tail -n +2 | awk '{ print " " $0}')
+		for i in "${entries[@]}"
+		do
+			echo -en "${i}\n"
+		done
+		echo -en "${list}"
+		;;
+	1)
+		selection="$(awk '{ print tolower($2) }' <<< "$@")"
+		if [ "$selection" = "go" ]; then
+			coproc ( rofi -show wlan -modes "wlan:~/.local/lib/kepler/commander/wlan/main" )
+		elif [ "$selection" = "rescan" ]; then
+			coproc ( rofi -show wlan.scan -modes "wlan.scan:~/.local/lib/kepler/commander/wlan/scan" )
+		fi
+		;;
+esac

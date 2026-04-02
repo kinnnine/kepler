@@ -1,0 +1,30 @@
+#!/bin/bash
+
+declare -a entries=(
+	"󰌍 Go Back..."	
+	" Current"
+	"󰆞 Crop / Selection"
+	"󰍹 Screen"
+)
+
+case $ROFI_RETV in
+	0)
+		for i in "${entries[@]}"
+		do
+			echo -en "${i}\n"
+		done
+		;;
+	1)
+		selection="$(awk '{ print tolower($2) }' <<< "$@")"
+		file="$HOME/Pictures/Screenshots/%Y-%m-%d-%H%M%S-screenshot.png"
+		if [ "$selection" = "go" ]; then
+			coproc ( rofi -show commander -modes "commander:~/.local/lib/kepler/commander/main" )	
+		elif [ "$selection" = "current" ]; then
+			coproc ( scrot -d 1 -u $file )
+		elif [ "$selection" = "crop" ]; then
+			coproc ( scrot -s $file)
+		elif [ "$selection" = "screen" ]; then
+			coproc ( scrot -d 1 $file )
+		fi
+		;;
+esac

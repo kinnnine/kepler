@@ -1,0 +1,11 @@
+#!/bin/bash
+
+print() {
+	printf '%s\n' "$1"
+	exit 0
+}
+
+icon="󰃰"
+datetime="$(date +"%F %T")"
+
+print "$icon $datetime"

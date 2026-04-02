@@ -1,0 +1,40 @@
+#!/bin/bash
+
+declare -a entries=(
+	"Scan SSIDs"
+	"Saved SSIDs"
+)
+
+case $ROFI_RETV in
+	0)
+		powered=$(nmcli radio wifi)
+		echo -en "󰌍 Go Back...\n"
+		if [ "$powered" = "enabled" ]; then
+			echo -en "󰤨 Turn Off\n"
+		else
+			echo -en "󰤨 Turn On\n"
+		fi
+		for i in "${entries[@]}"
+		do
+			echo -en "󰤨 ${i}\n"
+		done
+		;;
+	1)
+		selection="$(awk '{ print tolower($2) }' <<< "$@")"
+		if [ "$selection" = "go" ]; then
+			coproc ( rofi -show commander -modes "commander:~/.local/lib/kepler/commander/main" )
+		elif [ "$selection" = "turn" ]; then
+			toggle="$(awk '{ print tolower($3) }' <<< "$@")"
+			case "$toggle" in
+				"on")
+					coproc ( nmcli radio wifi on & notify-send "WLAN" "Turned on" )
+					;;
+				"off")
+					coproc ( nmcli radio wifi off & notify-send "WLAN" "Turned off" )
+					;;
+			esac
+		else
+			coproc ( rofi -show wlan.${selection} -modes "wlan.${selection}:~/.local/lib/kepler/commander/wlan/${selection}" )
+		fi
+		;;
+esac

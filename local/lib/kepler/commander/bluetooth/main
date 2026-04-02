@@ -1,0 +1,41 @@
+#!/bin/bash
+
+declare -a entries=(
+	"Scan Devices"
+	"Paired Devices"
+	"Trusted Devices"
+)
+
+case $ROFI_RETV in
+	0)
+		powered=$(bluetoothctl show | grep Powered | head -n1 | awk '{ print $2 }')
+		echo -en "󰌍 Go Back...\n"
+		if [ "$powered" = "yes" ]; then
+			echo -en " Turn Off\n"
+		else
+			echo -en " Turn On\n"
+		fi
+		for i in "${entries[@]}"
+		do
+			echo -en " ${i}\n"
+		done
+		;;
+	1)
+		selection="$(awk '{ print tolower($2) }' <<< "$@")"
+		if [ "$selection" = "go" ]; then
+			coproc ( rofi -show commander -modes "commander:~/.local/lib/kepler/commander/main" )
+		elif [ "$selection" = "turn" ]; then
+			toggle="$(awk '{ print tolower($3) }' <<< "$@")"
+			case "$toggle" in
+				"on")
+					coproc ( bluetoothctl power on & notify-send "Bluetooth" "Turned on" )
+					;;
+				"off")
+					coproc ( bluetoothctl power off & notify-send "Bluetooth" "Turned off" )
+					;;
+			esac
+		else
+			coproc ( rofi -show bluetooth.${selection} -modes "bluetooth.${selection}:~/.local/lib/kepler/commander/bluetooth/${selection}" )
+		fi
+		;;
+esac

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+print() {
+	printf '%s\n' "$1"
+	exit 0
+}
+
+icon="󰋊"
+free="$(df -h --output='source,avail' | grep mmcblk0p2 | awk '{ print $2 }')"
+used="$(df -h --output='source,used' | grep mmcblk0p2 | awk '{ print $2 }')"
+total="$(df -h --output='source,size' | grep mmcblk0p2 | awk '{ print $2 }')"
+
+print "$icon $total,$used,$free"

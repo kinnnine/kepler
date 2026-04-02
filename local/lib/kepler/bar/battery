@@ -1,0 +1,25 @@
+#!/bin/bash
+
+print() {
+	printf "%s\n" "$1"
+	exit 0
+}
+
+percentage="$(upower -b | grep percentage | awk '{ print $2 }')"
+state="$(upower -b | grep state | awk '{ print $2 }')"
+
+case "$state" in
+	"fully-charged")
+		state=""
+		;;
+	"discharging")
+		state="󰁹"
+		;;
+	"charging")
+		state="󰂅"
+		;;
+	*)
+		;;
+esac
+
+print "$state $percentage"

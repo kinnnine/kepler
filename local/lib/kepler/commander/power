@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ x"$@" = x"󰌍 Go Back..." ]; then
+	coproc ( rofi -show commander -modes "commander:~/.local/lib/kepler/commander/main" )
+	exit 0
+elif [ x"$@" = x"󰶐 Blank" ]; then
+	coproc ( rofi -show drun )
+	exit 0
+elif [ x"$@" = x" Reboot" ]; then
+	coproc ( qt-sudo reboot )
+	exit 0
+elif [ x"$@" = x" Shutdown" ]; then
+	coproc ( qt-sudo poweroff )
+	exit 0
+fi
+
+echo "󰌍 Go Back..."
+echo "󰶐 Blank"
+echo " Reboot"
+echo " Shutdown"

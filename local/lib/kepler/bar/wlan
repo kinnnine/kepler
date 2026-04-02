@@ -1,0 +1,29 @@
+#!/bin/bash
+
+print() {
+	printf "%s\n" "$1"
+	exit 0
+}
+
+wlan=$(nmcli device show | grep GENERAL.DEVICE | grep "wlan[0-9]" | head -n1 | awk '{ print $2 }')
+state=$(nmcli device show "$wlan" | grep GENERAL.STATE | awk '{ print $2 }')
+
+if [[ -n $wlan ]]; then
+	case $state in
+		100)
+			ssid="$(nmcli -f 'DEVICE,CONNECTION' device status | grep "$wlan" | head -n1 | awk '{print $2}')"
+			state="󰤨 $ssid"
+			;;
+		30)
+			state="󰤭"
+			;;
+		*)
+			state=""
+			;;
+	esac
+else
+	state=""
+fi
+
+print "$state"
+#nmcli -f 'DEVICE,STATE,CONNECTION' device status | grep wlan0 | head -n1

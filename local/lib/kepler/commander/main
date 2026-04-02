@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ x"$@" = x"󰀻 Launch Applications" ]; then
+	coproc ( rofi -show drun > /dev/null 2>&1 )
+	exit 0
+elif [ x"$@" = x" Browse Files" ]; then
+	coproc ( rofi -show drun > /dev/null 2>&1 )
+	exit 0
+elif [ x"$@" = x" Screenshot" ]; then
+	coproc ( rofi -show screenshot -modes "screenshot:~/.local/lib/kepler/commander/screenshot")
+	exit 0
+elif [ x"$@" = x"󱊞 Device Management" ]; then
+	coproc ( rofi -show device -modes "device:~/.local/lib/kepler/commander/device/main")
+	exit 0
+elif [ x"$@" = x" Bluetooth Options" ]; then
+	coproc ( rofi -show bluetooth -modes "bluetooth:~/.local/lib/kepler/commander/bluetooth/main")
+	exit 0
+elif [ x"$@" = x"󰤨 WLAN Options" ]; then
+	coproc ( rofi -show wlan -modes "wlan:~/.local/lib/kepler/commander/wlan/main")
+	exit 0
+elif [ x"$@" = x" Power" ]; then
+	coproc ( rofi -show power -modes "power:~/.local/lib/kepler/commander/power")
+	exit 0
+fi
+
+echo "󰀻 Launch Applications"
+echo " Browse Files"
+echo " Screenshot"
+echo "󱊞 Device Management"
+echo " Bluetooth Options"
+echo "󰤨 WLAN Options"
+echo " Power"
