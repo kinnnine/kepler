@@ -1,4 +1,4 @@
-# kepler-dotfiles
+# kepler
 
 "kepler" is a hostname for my Fujitsu ArrowTab device, the name is taken from NASA's discovered exoplanet named "Kepler-22b".
 
