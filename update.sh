@@ -19,6 +19,8 @@ cp -rv "$HOME/.config/rofi"	config
 cp -rv "$HOME/.config/dunst"	config
 cp -rv "$HOME/.config/btop"	config
 cp -rv "$HOME/.config/picom"	config
+cp -rv "$HOME/.config/libfm"	config
+cp -rv "$HOME/.config/pcmanfm"	config
 cp -rv "$HOME/.local/bin"	local
 cp -rv "$HOME/.local/lib"	local
 

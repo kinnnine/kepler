@@ -20,10 +20,14 @@ font pango:monospace 10
 #font pango:DejaVu Sans Mono 8
 
 # Color scheme
-client.focused	#000000 #b97946 #ffffff #b97946 #b97946
+client.focused	#000000 #b97946 #ffffff #000000 #000000
 
 # Set margins
 gaps inner 4
+
+# Disable titlebar
+default_border pixel 1
+default_floating_border pixel 1
 
 # Start unclutter to auto hide mouse cursor
 exec --no-startup-id unclutter -idle 3
