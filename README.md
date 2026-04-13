@@ -1,6 +1,6 @@
 # kepler
 
-"kepler" is a hostname for my Fujitsu ArrowTab device, the name is taken from NASA's discovered exoplanet named "Kepler-22b".
+"kepler" is a hostname for my Fujitsu ArrowsTab/Stylistic Q509/VE device, the name is taken from NASA's discovered exoplanet named "Kepler-22b".
 
 Although, the color scheme and theme in my i3 environment doesn't resemble a "Kepler" exoplanet at all.
 
